@@ -1,23 +1,43 @@
-import logo from './logo.svg';
+/* eslint-disable*/
 import './App.css';
+import React, { useState } from "react";
+import CustomRangePicker from './CustomRangePicker';
 
 function App() {
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="hdr-black">
+        <h1>상단바</h1>
+      </div>
+      <div className='filter'>
+        <div className='time'>
+          <div>
+            생성 시간
+          </div>
+          <CustomRangePicker/>
+        </div>
+        <div className='time'>
+          <div>
+            로그인 시간
+          </div>
+          <CustomRangePicker/>
+        </div>
+        <div className='time'>
+          <div>
+            로그아웃 시간
+          </div>
+          <CustomRangePicker/>
+        </div>
+        <div className='time'>
+          <div>
+            HearBeat 시간
+          </div>
+          <CustomRangePicker/>
+        </div>
+      </div>
+      
     </div>
   );
 }
