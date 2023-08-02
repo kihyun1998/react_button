@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { DatePicker, Space } from 'antd';
+import { ConfigProvider, DatePicker, Space } from 'antd';
 import dayjs from "dayjs";
+import koKR from 'antd/lib/locale/ko_KR';
 const { RangePicker } = DatePicker;
 
 
@@ -108,8 +109,12 @@ const CustomRangePicker = () => {
     }
   }
 
+  const test = (a) => {
+    console.log(a)
+  }
+
   return (
-    <Space direction="vertical" size={12}>
+    <ConfigProvider locale={koKR}>
       <RangePicker
         allowClear={true}
         size='small'
@@ -128,7 +133,7 @@ const CustomRangePicker = () => {
         onPanelChange={modeChange}
         onFocus={returnMode}
       />
-    </Space>
+    </ConfigProvider>
   );
 };
 

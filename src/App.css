@@ -7,9 +7,12 @@
 }
 
 .hdr-black{
-  background-color: rgb(68, 85, 238);
+  background-color: rgb(28, 113, 196);
   color:aliceblue;
   height: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .list{
@@ -19,7 +22,7 @@
 }
 
 .filter{
-  background-color: rgb(238, 241, 243);
+  background-color: rgb(247, 247, 247);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -33,6 +36,9 @@
   justify-content:space-evenly;
   height: 5em;
   font-weight: bold;
+}
+.time > .des {
+  text-align: left;
 }
 
 .btn-time{
