@@ -1,9 +1,10 @@
-// import React, { useState } from 'react';
-import { ProTable } from '@ant-design/pro-components';
-import { ConfigProvider } from 'antd';
-import koKR from 'antd/lib/locale/ko_KR';
-import db from './db.json';
+import React, { useState } from "react";
 import dayjs from 'dayjs';
+import { ProTable } from '@ant-design/pro-components';
+import { ConfigProvider, theme, Button, Card } from "antd";
+import koKR from 'antd/lib/locale/ko_KR';
+
+import db from './db.json';
 import CustomRangePicker from './CustomRangePicker';
 
 
@@ -89,7 +90,7 @@ const columns=[
         title: '접속기 로그인 성공 시간',
         dataIndex: 'easyAccessLastAccessTimestamp',
         key: 'easyAccessLastAccessTimestamp',
-        renderFormItem:(item,config) => {
+        renderFormItem:() => {
             return(
                 <CustomRangePicker/>
             )
@@ -99,7 +100,7 @@ const columns=[
         title: '비밀번호 변경 시간',
         dataIndex: 'passwordLastChangedTimestamp',
         key: 'passwordLastChangedTimestamp',
-        renderFormItem:(item,config) => {
+        renderFormItem:() => {
             return(
                 <CustomRangePicker/>
             )
@@ -107,20 +108,24 @@ const columns=[
     }
 ]
 
-// const dataSource =[
-//     {
-//         key: '1',
-//         name: 'First'
-//     },
-//     {
-//         key: '2',
-//         title: 'Second'
-//     }
-// ]
-
 const CustomProTable = () => {
+    const { defaultAlgorithm, darkAlgorithm } = theme;
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    const handleClick = () => {
+        setIsDarkMode((previousValue) => !previousValue);
+    }
+
+
     return(
-        <ConfigProvider locale={koKR}>
+        <ConfigProvider locale={koKR} theme={{
+            algorithm : isDarkMode ? darkAlgorithm : defaultAlgorithm
+            }}>
+            <Card style={{width:"max-content"}}>
+                <Button onClick={handleClick}>
+                    Change theme to {isDarkMode ? "Light":"Dark"}
+                </Button>
+            </Card>
             <ProTable
             columns={columns}
             dataSource={dataSource}
