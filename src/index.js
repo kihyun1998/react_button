@@ -3,19 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ThemeSwitcherProvider } from "react-css-theme-switcher";
-
-const theme = {
-  dark : 'antd/dist/antd.dark.css',
-  light : '',
-}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ThemeSwitcherProvider themeMap={theme} defaultTheme='light'>
-      <App />
-    </ThemeSwitcherProvider>
+    <App />
   </React.StrictMode>
 );
 
