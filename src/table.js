@@ -160,19 +160,21 @@ const columns=[
         title: '접속기 로그인 성공 시간',
         dataIndex: 'easyAccessLastAccessTimestamp',
         key: 'easyAccessLastAccessTimestamp',
-        renderFormItem:() => {
-            return(
-                <CustomRangePicker/>
-            )
-        },
         formItemProps:{
             labelCol:{
                 span:24,
             },
             wrapperCol:{
-                span:24
+                span:24,
+                offset:0
             }
+        },
+        renderFormItem:() => {
+            return(
+                <CustomRangePicker/>
+            )
         }
+        
     },
     {
         title: '비밀번호 변경 시간',

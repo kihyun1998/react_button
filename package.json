@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "https://192.168.135.21:7000",
   "dependencies": {
+    "@ant-design/compatible": "^5.1.2",
     "@ant-design/pro-components": "^2.6.10",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

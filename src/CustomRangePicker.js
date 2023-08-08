@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { ConfigProvider, DatePicker } from 'antd';
+import { DatePicker } from 'antd';
 import dayjs from "dayjs";
-import koKR from 'antd/lib/locale/ko_KR';
 const { RangePicker } = DatePicker;
 
 
@@ -192,41 +191,42 @@ const CustomRangePicker = () => {
 
 
   return (
-    <ConfigProvider locale={koKR}>
-      <RangePicker
-        allowClear={true}
-        size='small'
-        renderExtraFooter={footer}
 
-        // 날짜와 시간 금지
-        disabledDate={disabledRangeDate}
-        disabledTime={disabledRangeTime}
-        // 시간 보여주면서 금지된 값은 안보이게
-        showTime={{
-          hideDisabledOptions:true,
-        }}
+    <RangePicker
+      style={{fontSize:"24px",width:"100%",height:"100%"}}
+      allowClear={true}
+      size='small'
+      renderExtraFooter={footer}
 
-        // 값은 date state로 직접 지정
-        value={date}
-        // 값이 바뀌면 감지하여 saveDate 실행
-        onCalendarChange={onCalendarChange}
+      // 날짜와 시간 금지
+      disabledDate={disabledRangeDate}
+      disabledTime={disabledRangeTime}
+      // 시간 보여주면서 금지된 값은 안보이게
+      showTime={{
+        hideDisabledOptions:true,
+      }}
 
-        // 모드 mode state로 직접 지정
-        mode={mode}
-        // 모드 변경 감지
-        onPanelChange={onPanelChange}
-        // focus 위치 감지 (focus란 클릭 시 밑줄)
-        onFocus={onFocus}
+      // 값은 date state로 직접 지정
+      value={date}
+      // 값이 바뀌면 감지하여 saveDate 실행
+      onCalendarChange={onCalendarChange}
 
-        // input click 시 달력 초기화(선택했던 날짜로)
-        // 선택한 날짜 없으면 초기화안됨
-        onClick={onClick}
-        format={"YYYY-MM-DD HH:mm:ss"}
+      // 모드 mode state로 직접 지정
+      mode={mode}
+      // 모드 변경 감지
+      onPanelChange={onPanelChange}
+      // focus 위치 감지 (focus란 클릭 시 밑줄)
+      onFocus={onFocus}
 
-        open={open}
-        onOpenChange={onOpenChange}
-      />
-    </ConfigProvider>
+      // input click 시 달력 초기화(선택했던 날짜로)
+      // 선택한 날짜 없으면 초기화안됨
+      onClick={onClick}
+      format={"YYYY-MM-DD HH:mm:ss"}
+
+      open={open}
+      onOpenChange={onOpenChange}
+    />
+
   );
 };
 
