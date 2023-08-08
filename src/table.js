@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import dayjs from 'dayjs';
 import { ProTable } from '@ant-design/pro-components';
-import { ConfigProvider, theme, Button, Card } from "antd";
-import koKR from 'antd/lib/locale/ko_KR';
 
 import db from './db.json';
 import CustomRangePicker from './CustomRangePicker';
@@ -39,17 +37,41 @@ const columns=[
     {
         title: '이름',
         dataIndex: 'name',
-        key: 'name'
+        key: 'name',
+        formItemProps:{
+            labelCol:{
+                span:24,
+            },
+            wrapperCol:{
+                span:24
+            }
+        }
     },
     {
         title: '사용자 아이디',
         dataIndex: 'userId',
-        key: 'userId'
+        key: 'userId',
+        formItemProps:{
+            labelCol:{
+                span:24,
+            },
+            wrapperCol:{
+                span:24
+            }
+        }
     },
     {
         title: '사용자 폴더',
         dataIndex: 'userClassName',
-        key: 'userClassName'
+        key: 'userClassName',
+        formItemProps:{
+            labelCol:{
+                span:24,
+            },
+            wrapperCol:{
+                span:24
+            }
+        }
     },
     {
         title: '상태',
@@ -59,32 +81,80 @@ const columns=[
         valueEnum:{
             true : {text:'정상', status: 'Success'},
             false : {text:'잠김', status: 'Error'}
+        },
+        formItemProps:{
+            labelCol:{
+                span:24,
+            },
+            wrapperCol:{
+                span:24
+            }
         }
     },
     {
         title: '접속 로그인 주소',
         dataIndex: 'IPAddress',
-        key: 'IPAddress'
+        key: 'IPAddress',
+        formItemProps:{
+            labelCol:{
+                span:24,
+            },
+            wrapperCol:{
+                span:24
+            }
+        }
     },
     {
         title: '조직',
         dataIndex: 'ou',
-        key: 'ou'
+        key: 'ou',
+        formItemProps:{
+            labelCol:{
+                span:24,
+            },
+            wrapperCol:{
+                span:24
+            }
+        }
     },
     {
         title: '직함',
         dataIndex: 'title',
-        key: 'title'
+        key: 'title',
+        formItemProps:{
+            labelCol:{
+                span:24,
+            },
+            wrapperCol:{
+                span:24
+            }
+        }
     },
     {
         title: '이메일',
         dataIndex: 'email',
-        key: 'email'
+        key: 'email',
+        formItemProps:{
+            labelCol:{
+                span:24,
+            },
+            wrapperCol:{
+                span:24
+            }
+        }
     },
     {
         title: '시간 유형',
         dataIndex: 'timeclass',
-        key: 'timeclass'
+        key: 'timeclass',
+        formItemProps:{
+            labelCol:{
+                span:24,
+            },
+            wrapperCol:{
+                span:24
+            }
+        }
     },
     {
         title: '접속기 로그인 성공 시간',
@@ -94,6 +164,14 @@ const columns=[
             return(
                 <CustomRangePicker/>
             )
+        },
+        formItemProps:{
+            labelCol:{
+                span:24,
+            },
+            wrapperCol:{
+                span:24
+            }
         }
     },
     {
@@ -104,34 +182,25 @@ const columns=[
             return(
                 <CustomRangePicker/>
             )
+        },
+        formItemProps:{
+            labelCol:{
+                span:24,
+            },
+            wrapperCol:{
+                span:24
+            }
         }
     }
 ]
 
 const CustomProTable = () => {
-    const { defaultAlgorithm, darkAlgorithm } = theme;
-    const [isDarkMode, setIsDarkMode] = useState(false);
-
-    const handleClick = () => {
-        setIsDarkMode((previousValue) => !previousValue);
-    }
-
-
     return(
-        <ConfigProvider locale={koKR} theme={{
-            algorithm : isDarkMode ? darkAlgorithm : defaultAlgorithm
-            }}>
-            <Card style={{width:"max-content"}}>
-                <Button onClick={handleClick}>
-                    Change theme to {isDarkMode ? "Light":"Dark"}
-                </Button>
-            </Card>
-            <ProTable
-            columns={columns}
-            dataSource={dataSource}
-            rowKey={"key"}
-            />
-        </ConfigProvider>
+        <ProTable
+        columns={columns}
+        dataSource={dataSource}
+        rowKey={"key"}
+        />
     )
 }
 
