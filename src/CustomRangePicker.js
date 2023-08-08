@@ -192,7 +192,7 @@ const CustomRangePicker = () => {
     if (start){       // 왼쪽 focus
       if (date == null){ // 0 0 인 경우
         setDate( [clickDate, null] )
-      } else if (date[1] == null){ // 1 0인 경우 now null
+      } else if (date[1] == null){
         setDate( [clickDate, null] )
       } else if (date[0] == null){
         setDate( [clickDate,date[1]])  

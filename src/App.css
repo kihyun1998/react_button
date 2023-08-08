@@ -3,9 +3,13 @@
 *{
   margin: 0;
 }
+html,body{
+  height: 100vh;
+}
 
 .App {
   text-align: center;
+  height: 100vh;
 }
 
 
@@ -31,6 +35,7 @@
 .body{
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 .head-space{
   display: flex;
