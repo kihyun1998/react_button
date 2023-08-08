@@ -199,6 +199,7 @@ const columns=[
 const CustomProTable = () => {
     return(
         <ProTable
+        size="small"
         columns={columns}
         dataSource={dataSource}
         rowKey={"key"}

@@ -119,7 +119,6 @@ const CustomRangePicker = () => {
   // Focus가 바뀌면 실행
   const onFocus = () => {
 
-    console.log("Change Mode")
 
     // 이 부분은 mode 초기화를 위해서
     if (notDateMode){
@@ -129,58 +128,56 @@ const CustomRangePicker = () => {
       setMode(['date','date'])
     }
     
-    // 값을 확인을 누르지 않았을 때 다른데 가면 초기화하기 위해서
-    // setIsOpen의 상태와 연관있음
-    if (isOpen){
-      setIsOpen(false)
-    }else{    // open되어 있던 상태에서만 동작하도록 하는 코드
-      if (date==null){
-        console.log(2)
-        setDate([null,null])
-        setOpen(false)
-        setTimeout(()=>{
-          setOpen(true)
-        },1)
-      }else if(date[0] == null && date[1] == null){
-        console.log(3)
-        setDate([null,null])
-        setOpen(false)
-        setTimeout(()=>{
-          setOpen(true)
-        },1)
-      }
-    }
+    // // 값을 확인을 누르지 않았을 때 다른데 가면 초기화하기 위해서
+    // // setIsOpen의 상태와 연관있음
+    // if (isOpen){
+    //   setIsOpen(false)
+    // }else{    // open되어 있던 상태에서만 동작하도록 하는 코드
+    //   if (date==null){
+    //     console.log(2)
+    //     setDate([null,null])
+    //     setOpen(false)
+    //     setTimeout(()=>{
+    //       setOpen(true)
+    //     },1)
+    //   }else if(date[0] == null && date[1] == null){
+    //     console.log(3)
+    //     setDate([null,null])
+    //     setOpen(false)
+    //     setTimeout(()=>{
+    //       setOpen(true)
+    //     },1)
+    //   }
+    // }
   }
 
 
-  const onClick = () => {
-    console.log("is Click")
+  // const onClick = () => {
 
-    // 달력 초기화 함수
-    if (date != null){
-      let cp0 = date[0]
-      let cp1 = date[1]
-      if (cp0 != null && cp1 != null){
-        cp0 = cp0.format("YYYY-MM-DD HH:mm:ss")
-        cp1 = cp1.format("YYYY-MM-DD HH:mm:ss")
-        const cpDate0 = dayjs(cp0)
-        const cpDate1 = dayjs(cp1)
-        setDate([cpDate0,cpDate1])
-      }else if(cp0 != null && cp1 == null){
-        cp0 = cp0.format("YYYY-MM-DD HH:mm:ss")
-        const cpDate0 = dayjs(cp0)
-        setDate([cpDate0,null])
-      }else if(cp1 != null && cp0 == null){
-        cp1 = cp1.format("YYYY-MM-DD HH:mm:ss")
-        const cpDate1 = dayjs(cp1)
-        setDate([null,cpDate1])
-      }
-    }
-  }
+  //   // 달력 초기화 함수
+  //   if (date != null){
+  //     let cp0 = date[0]
+  //     let cp1 = date[1]
+  //     if (cp0 != null && cp1 != null){
+  //       cp0 = cp0.format("YYYY-MM-DD HH:mm:ss")
+  //       cp1 = cp1.format("YYYY-MM-DD HH:mm:ss")
+  //       const cpDate0 = dayjs(cp0)
+  //       const cpDate1 = dayjs(cp1)
+  //       setDate([cpDate0,cpDate1])
+  //     }else if(cp0 != null && cp1 == null){
+  //       cp0 = cp0.format("YYYY-MM-DD HH:mm:ss")
+  //       const cpDate0 = dayjs(cp0)
+  //       setDate([cpDate0,null])
+  //     }else if(cp1 != null && cp0 == null){
+  //       cp1 = cp1.format("YYYY-MM-DD HH:mm:ss")
+  //       const cpDate1 = dayjs(cp1)
+  //       setDate([null,cpDate1])
+  //     }
+  //   }
+  // }
 
   // open 값 바뀌면 open 적용
   const onOpenChange = (val) => {
-    console.log("Open Change")
     setOpen(val)
     if(val){
       setIsOpen(true)
@@ -188,6 +185,31 @@ const CustomRangePicker = () => {
       setIsOpen(false)
     }
   }
+
+
+  const onDateClick = (clickDate) => {
+
+    if (start){       // 왼쪽 focus
+      if (date == null){ // 0 0 인 경우
+        setDate( [clickDate, null] )
+      } else if (date[1] == null){ // 1 0인 경우 now null
+        setDate( [clickDate, null] )
+      } else if (date[0] == null){
+        setDate( [clickDate,date[1]])  
+      } else {
+        setDate( [clickDate,date[1]])
+      }
+    }else if (end){   // 오른쪽 focus
+      if (date == null){
+        setDate( [null, clickDate] )
+      } else if (date[0] == null){
+        setDate( [null, clickDate] )
+      } else {
+        setDate( [date[0], clickDate])
+      }
+    }
+    setMode(['date','date'])
+  };
 
 
   return (
@@ -204,6 +226,7 @@ const CustomRangePicker = () => {
       // 시간 보여주면서 금지된 값은 안보이게
       showTime={{
         hideDisabledOptions:true,
+        
       }}
 
       // 값은 date state로 직접 지정
@@ -220,11 +243,24 @@ const CustomRangePicker = () => {
 
       // input click 시 달력 초기화(선택했던 날짜로)
       // 선택한 날짜 없으면 초기화안됨
-      onClick={onClick}
+      // onClick={onClick}
       format={"YYYY-MM-DD HH:mm:ss"}
 
       open={open}
       onOpenChange={onOpenChange}
+
+      cellRender={(current, info) => {
+        if (info.type !== 'date') return info.originNode;
+        
+        return (
+          <div className="ant-picker-cell-inner" onClick={()=>{
+            onDateClick(current)
+          }}>
+            {current.date()}
+          </div>
+        )
+      }}
+      
     />
 
   );
