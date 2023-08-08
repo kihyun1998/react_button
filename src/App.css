@@ -28,7 +28,7 @@
   background-color: rgb(12, 137, 255);
   color: white;
 }
-.table{
+.body{
   display: flex;
   flex-direction: column;
 }
@@ -60,11 +60,14 @@
   display: flex;
   justify-content: space-between;
 }
-.data{
+.table{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  margin: 5px;
+  width: 80%;
+  min-width: 80em;
 }
 
 .side-bar{

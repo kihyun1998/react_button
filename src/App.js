@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div className="App" style={{backgroundColor : isDarkMode ? "#000000" : "#ffffff"}}>
-      <div className='table'>
+      <div className='body'>
         <ConfigProvider locale={koKR} theme={{
             algorithm : isDarkMode ? darkAlgorithm : defaultAlgorithm
             }}>
@@ -46,7 +46,7 @@ function App() {
                 {/* {
                   side == true ? <div className='side-bar'><Sidebar/></div>: null
                 } */}
-              <div className='data'>
+              <div className='table'>
                 <CustomProTable/>
               </div>
               <div className='blank'></div>
