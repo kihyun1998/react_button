@@ -2,7 +2,7 @@ import React from "react";
 import dayjs from 'dayjs';
 import { ProTable } from '@ant-design/pro-components';
 
-import db from './db.json';
+import db from '../data/db.json';
 import CustomRangePicker from './CustomRangePicker';
 
 

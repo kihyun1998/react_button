@@ -1,0 +1,134 @@
+{
+	"Mandantory" : true,
+	"ID" : "Administrator",
+	"Children" : {
+		"dashboard" : {
+			"Show" : false,
+			"Permission" : "",
+			"Children" : {
+				"chart" : {
+					"Show" : false,
+					"Permission" : "RW"
+				},
+				"topology" : {
+					"Show" : false,
+					"Permission" : "RW"
+				},
+				"monitoring" : {
+					"Show" : false,
+					"Permission" : "RW"
+				}
+			}
+		},
+		"access" : {
+			"Show" : true,
+			"Permission" : "",
+			"Children" : {
+				"accessEvent" : {
+					"Show" : true,
+					"Permission" : "RW"
+				},
+				"accessNodeSession" : {
+					"Show" : true,
+					"Permission" : "RW"
+				},
+				"accessAdminSession" : {
+					"Show" : true,
+					"Permission" : "RW"
+				},
+				"accessUserSession" : {
+					"Show" : true,
+					"Permission" : "RW"
+				}
+			}
+		},
+		"resource" : {
+			"Show" : true,
+			"Permission" : "",
+			"Children" : {
+				"resourceAdmin" : {
+					"Show" : true,
+					"Permission" : "RW"
+				},
+				"resourceUser" : {
+					"Show" : true,
+					"Permission" : "RW"
+				},
+				"resourceNode" : {
+					"Show" : true,
+					"Permission" : "RW"
+				},
+				"resourceAccount" : {
+					"Show" : false,
+					"Permission" : "RW"
+				}
+			}
+		},
+		"policy" : {
+			"Show" : true,
+			"Permission" : "",
+			"Children" : {
+				"policyPassword" : {
+					"Show" : false,
+					"Permission" : "RW"
+				},
+				"policyToken" : {
+					"Show" : true,
+					"Permission" : "RW"
+				},
+				"policyLogin" : {
+					"Show" : false,
+					"Permission" : "RW"
+				},
+				"policyAccessControl" : {
+					"Show" : true,
+					"Permission" : "RW"
+				},
+				"policyProvisioning" : {
+					"Show" : false,
+					"Permission" : "RW"
+				},
+				"policyLifecycle" : {
+					"Show" : true,
+					"Permission" : "RW"
+				}
+			}
+		},
+		"history" : {
+			"Show" : true,
+			"Permission" : "",
+			"Children" : {
+				"historyRequest" : {
+					"Show" : true,
+					"Permission" : "R"
+				},
+				"historyLifecycle" : {
+					"Show" : true,
+					"Permission" : "R"
+				}
+			}
+		},
+		"config" : {
+			"Show" : true,
+			"Permission" : "",
+			"Children" : {
+				"configProcess" : {
+					"Show" : true,
+					"Permission" : "RW"
+				},
+				"configGlobalSetting" : {
+					"Show" : true,
+					"Permission" : "RW"
+				},
+				"configClass" : {
+					"Show" : true,
+					"Permission" : "RW"
+				},
+				"configInboxNotice" : {
+					"Show" : true,
+					"Permission" : "RW"
+				}
+			}
+		}
+	}
+}

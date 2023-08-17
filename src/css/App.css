@@ -3,13 +3,16 @@
 *{
   margin: 0;
 }
-html,body{
-  height: 100vh;
+html{
+  min-height: 100vh;
+}
+body{
+  min-height: 100vh;
 }
 
 .App {
   text-align: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 
@@ -51,10 +54,9 @@ html,body{
   border-radius: 5px;
   width: 100%;
 }
-.side-icon{
-  margin-left: 0.5em;
+.btn-menu{
+  margin-left: 1em;
   width: 3em;
-  text-align: left;
 }
 .color-card{
   margin-top:1px;
@@ -75,9 +77,9 @@ html,body{
   min-width: 80em;
 }
 
-.side-bar{
-  border: 5px solid red;
-  width: 10em;
+.menu{
+  width: 20em;
+  max-width: 30%;
 }
 .blank{
   width: 0.1em;
