@@ -87,7 +87,7 @@ function App() {
                     {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                   </Button>
                 </div>
-                <h1>Acra Point</h1>
+                <h1>ACRA Point</h1>
                 <Card className="color-card" style={{backgroundColor : isDarkMode ? "#141414" : "#1C71C4", border:'none'}}>
                   <h4 style={{color:"white"}}>Go {isDarkMode ? "Light":"Dark"}</h4>
                   <Switch onClick={handleClick}/>   
