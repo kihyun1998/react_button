@@ -1,11 +1,13 @@
 /* eslint-disable*/
 import '../css/App.css';
 import React, { useState } from "react";
-import { ConfigProvider, theme, Button, Card,Switch,Menu } from "antd";
-import koKR from 'antd/lib/locale/ko_KR';
-import CustomProTable from './table';
+import { BrowserRouter as Router } from 'react-router-dom';
+import ResourceUser from './User';
+
 import menuData from '../data/menu.json'
 
+import koKR from 'antd/lib/locale/ko_KR';
+import { ConfigProvider, theme, Button, Card,Switch,Menu } from "antd";
 import {
   AppstoreOutlined,
   ContainerOutlined,
@@ -27,22 +29,6 @@ function getItem(label, key, icon, children, type) {
   };
 }
 
-// const items = [
-//   getItem('Access', 'access', <DesktopOutlined />),
-//   getItem('Option 3', '3', <ContainerOutlined />),
-//   getItem('Navigation One', 'sub1', <MailOutlined />, [
-//     getItem('Option 5', '5'),
-//     getItem('Option 6', '6'),
-//     getItem('Option 7', '7'),
-//     getItem('Option 8', '8'),
-//   ]),
-//   getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-//     getItem('Option 9', '9'),
-//     getItem('Option 10', '10'),
-//     getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')]),
-//   ]),
-// ];
-
 const iconList = [<DesktopOutlined />,<TeamOutlined />,<ContainerOutlined />,<HistoryOutlined />,<AppstoreOutlined />]
 
 const setItems = ()=>{
@@ -51,16 +37,14 @@ const setItems = ()=>{
   for (let [k, v] of Object.entries(menuData.Children)) {
     if (v.Show == true){
       let subArr = []
-      let subCnt = 0
+
       for (let [ck,cv] of Object.entries(v.Children)){
         if(cv.Show == true){
-          let sub_itm = getItem(ck,`sub_${cnt}${subCnt}`)
+          let sub_itm = getItem(ck,ck)
           subArr.push(sub_itm)
         }
-        subCnt++
       }
-      console.log(k,cnt-1)
-      let itm = getItem(k,cnt-1,iconList[cnt-1],subArr)
+      let itm = getItem(k,k,iconList[cnt-1],subArr)
       itemsArr.push(itm)
     }
     cnt++
@@ -75,6 +59,7 @@ function App() {
   let items = setItems()
   const { defaultAlgorithm, darkAlgorithm } = theme;
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [keyPath, setKeyPath] = useState(['','']);
 
   const handleClick = () => {
     setIsDarkMode((previousValue) => !previousValue);
@@ -115,16 +100,21 @@ function App() {
               {/* 메뉴부분 */}
               <div className='menu'>
                 <Menu
-                    defaultSelectedKeys={['0']}
-                    defaultOpenKeys={['sub_0']}
                     mode="inline"
                     inlineCollapsed={collapsed}
                     items={items}
+                    onClick={(v)=>{
+                      let cp = [...keyPath]
+                      cp[0] = v.keyPath[1]
+                      cp[1] = v.keyPath[0]
+                      setKeyPath(cp)
+                    }}
                   />
               </div>
-              <div className='table'>
-                <CustomProTable/>
-              </div>
+
+              <ResourceUser keyPath={keyPath} isDarkMode={isDarkMode}/>
+              
+
               <div className='blank'></div>
             </div>
         </ConfigProvider>
