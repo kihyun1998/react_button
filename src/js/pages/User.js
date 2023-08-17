@@ -1,7 +1,7 @@
 /* eslint-disable*/
-import '../css/App.css';
+import '../../css/App.css';
 import React from "react";
-import CustomProTable from './table';
+import CustomProTable from '../table';
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb } from 'antd';
 

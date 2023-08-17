@@ -1,8 +1,7 @@
 /* eslint-disable*/
 import '../css/App.css';
 import React, { useState } from "react";
-import { BrowserRouter as Router } from 'react-router-dom';
-import ResourceUser from './User';
+import ResourceUser from './pages/User';
 
 import menuData from '../data/menu.json'
 
