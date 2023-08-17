@@ -73,13 +73,13 @@ body{
   justify-content: flex-start;
   align-items: center;
   margin: 5px;
-  width: 80%;
-  min-width: 80em;
+  width: 60%;
+  min-width: 60em;
 }
 
 .menu{
-  width: 20em;
-  max-width: 30%;
+  width: 15em;
+  max-width: 25%;
 }
 .blank{
   width: 0.1em;
