@@ -7,7 +7,6 @@ import { Breadcrumb } from 'antd';
 
 
 function ResourceUser(props) {
-    console.log(props.isDarkMode)
     return (
     <div className='table'>
         <div className='table-header'>

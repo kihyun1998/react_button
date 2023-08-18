@@ -25,7 +25,7 @@ function getItem(label, key, icon, children, type) {
     icon,
     children,
     label,
-    type,
+    type
   };
 }
 
@@ -127,16 +127,18 @@ function App() {
               {/* 메뉴부분 */}
               <div className='menu'>
                 <Menu
-                    mode="inline"
-                    inlineCollapsed={collapsed}
-                    //커스텀을 위해서 주석처리
-                    // items={items}
-                    onClick={(v)=>{
-                      let cp = [...keyPath]
-                      cp[0] = v.keyPath[1]
-                      cp[1] = v.keyPath[0]
-                      setKeyPath(cp)
-                    }}
+                  
+                  mode="inline"
+                  inlineCollapsed={collapsed}
+                  //커스텀을 위해서 주석처리
+                  // items={items}
+                  onClick={(v)=>{
+                    console.log(v)
+                    let cp = [...keyPath]
+                    cp[0] = v.keyPath[1]
+                    cp[1] = v.keyPath[0]
+                    setKeyPath(cp)
+                  }}
                 >
                   
                   {/*일단 커스텀한거 잘 작동하긴 함*/}

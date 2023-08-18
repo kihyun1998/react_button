@@ -97,4 +97,6 @@ hr {
   height: 1px;
 }
 
-.ant-menu-inline-collapsed-tooltip { display: none; }
+.ant-menu-title-content {
+  display: none;
+}
