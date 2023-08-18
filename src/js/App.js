@@ -6,7 +6,7 @@ import ResourceUser from './pages/User';
 import menuData from '../data/menu.json'
 
 import koKR from 'antd/lib/locale/ko_KR';
-import { ConfigProvider, theme, Button, Card,Switch,Menu } from "antd";
+import { ConfigProvider, theme, Button, Card, Switch, Menu, Popover } from "antd";
 import {
   AppstoreOutlined,
   ContainerOutlined,
@@ -16,6 +16,7 @@ import {
   TeamOutlined,
   HistoryOutlined
 } from '@ant-design/icons';
+import SubMenu from 'antd/es/menu/SubMenu';
 
 
 function getItem(label, key, icon, children, type) {
@@ -70,6 +71,33 @@ function App() {
     setCollapsed(!collapsed);
   };
 
+  function CustomPopover({ children, subMenu, onItemClick }) {
+    const content = (
+      <div>
+        {subMenu.children.map((sub) => (
+          <div
+            key={sub.key}
+            style={{ marginBottom: 10, cursor: "pointer" }}
+            onClick={() => onItemClick(`${subMenu.label}: ${sub.label}`)}
+          >
+            {sub.label}
+          </div>
+        ))}
+      </div>
+    );
+  
+    return (
+      <Popover 
+        title={subMenu.label}
+        content={content} 
+        trigger="hover"
+        placement="rightTop"
+      >
+        <div>{children}</div>
+      </Popover>
+    );
+  }
+
   return (
     <div className="App" style={{backgroundColor : isDarkMode ? "#000000" : "#ffffff"}}>
       <div className='body'>
@@ -101,14 +129,48 @@ function App() {
                 <Menu
                     mode="inline"
                     inlineCollapsed={collapsed}
-                    items={items}
+                    //커스텀을 위해서 주석처리
+                    // items={items}
                     onClick={(v)=>{
                       let cp = [...keyPath]
                       cp[0] = v.keyPath[1]
                       cp[1] = v.keyPath[0]
                       setKeyPath(cp)
                     }}
-                  />
+                >
+                  
+                  {/*일단 커스텀한거 잘 작동하긴 함*/}
+                  
+                  {items.map((item)=>(
+                    <SubMenu
+                      key={item.key}
+                      icon={item.icon}
+                      title={
+                        collapsed ? (
+                          <CustomPopover
+                            subMenu={item}
+                            onItemClick={(value) => console.log("Sub-item selected:", value)}
+                          >
+                            {item.label}
+                          </CustomPopover>
+                        ) : (
+                          item.label
+                        )
+                      }
+                    >
+
+                      {item.children.map((sub)=>(
+                        <Menu.Item
+                          key={sub.key}
+                        >
+                          {sub.label}
+                        </Menu.Item>
+                      )
+                      )}
+                      
+                    </SubMenu>
+                  ))}
+                </Menu>
               </div>
 
               <ResourceUser keyPath={keyPath} isDarkMode={isDarkMode}/>

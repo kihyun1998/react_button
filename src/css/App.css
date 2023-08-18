@@ -96,3 +96,5 @@ hr {
   width: 100%;
   height: 1px;
 }
+
+.ant-menu-inline-collapsed-tooltip { display: none; }
