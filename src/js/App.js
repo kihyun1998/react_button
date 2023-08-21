@@ -6,7 +6,7 @@ import ResourceUser from './pages/User';
 import menuData from '../data/menu.json'
 
 import koKR from 'antd/lib/locale/ko_KR';
-import { ConfigProvider, theme, Button, Card, Switch, Menu, Popover } from "antd";
+import { ConfigProvider, theme, Button, Card, Switch, Menu, Popover, ItemGroup } from "antd";
 import {
   AppstoreOutlined,
   ContainerOutlined,
@@ -53,10 +53,38 @@ const setItems = ()=>{
   return itemsArr
 }
 
+const setItemsCol = ()=>{
+  let itemsArr=[]
+  let cnt = 0
+  for (let [k, v] of Object.entries(menuData.Children)) {
+    if (v.Show == true){
+      let subArr = []
+      let subArr2 = []
+      for (let [ck,cv] of Object.entries(v.Children)){
+        if(cv.Show == true){
+          let sub_itm = getItem(ck,ck)
+          subArr2.push(sub_itm)
+        }
+      }
+
+      let itmArr = []
+      let itm2 = getItem(k,`${k}_${cnt}`,null,subArr2,'group')
+      itmArr.push(itm2)
+
+      let itm = getItem(k,k,iconList[cnt-1],itmArr)
+      itemsArr.push(itm)
+    }
+    cnt++
+  }
+
+  return itemsArr
+}
+
 
 
 function App() {
   let items = setItems()
+  let colItems = setItemsCol()
   const { defaultAlgorithm, darkAlgorithm } = theme;
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [keyPath, setKeyPath] = useState(['','']);
@@ -70,33 +98,6 @@ function App() {
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
-
-  function CustomPopover({ children, subMenu, onItemClick }) {
-    const content = (
-      <div>
-        {subMenu.children.map((sub) => (
-          <div
-            key={sub.key}
-            style={{ marginBottom: 10, cursor: "pointer" }}
-            onClick={() => onItemClick(`${subMenu.label}: ${sub.label}`)}
-          >
-            {sub.label}
-          </div>
-        ))}
-      </div>
-    );
-  
-    return (
-      <Popover 
-        title={subMenu.label}
-        content={content} 
-        trigger="hover"
-        placement="rightTop"
-      >
-        <div>{children}</div>
-      </Popover>
-    );
-  }
 
   return (
     <div className="App" style={{backgroundColor : isDarkMode ? "#000000" : "#ffffff"}}>
@@ -127,7 +128,6 @@ function App() {
               {/* 메뉴부분 */}
               <div className='menu'>
                 <Menu
-                  
                   mode="inline"
                   inlineCollapsed={collapsed}
                   //커스텀을 위해서 주석처리
@@ -141,37 +141,60 @@ function App() {
                   }}
                 >
                   
-                  {/*일단 커스텀한거 잘 작동하긴 함*/}
-                  
-                  {items.map((item)=>(
-                    <SubMenu
-                      key={item.key}
-                      icon={item.icon}
-                      title={
-                        collapsed ? (
-                          <CustomPopover
-                            subMenu={item}
-                            onItemClick={(value) => console.log("Sub-item selected:", value)}
-                          >
-                            {item.label}
-                          </CustomPopover>
-                        ) : (
-                          item.label
-                        )
-                      }
-                    >
-
-                      {item.children.map((sub)=>(
-                        <Menu.Item
+                  {/* 메뉴 커스텀 코드 */}
+                  {
+                    collapsed ? (
+                      colItems.map((sub)=>(
+                        <SubMenu
                           key={sub.key}
+                          icon={sub.icon}
+                          title={sub.label}
                         >
-                          {sub.label}
-                        </Menu.Item>
-                      )
-                      )}
-                      
-                    </SubMenu>
-                  ))}
+                          
+                          {sub.children.map((g)=>(
+                            <Menu.ItemGroup
+                              title={g.label}
+                              key={g.key}
+                            >
+                              {g.children.map((i=>(
+                                <Menu.Item
+                                  label={i.label}
+                                  key={i.key}
+                                >
+                                  {i.label}
+    
+                                </Menu.Item>
+                              )))}
+                            </Menu.ItemGroup>
+                          ))}
+                          
+                        </SubMenu>
+                      ))
+
+                    ) : (
+                      items.map((item)=>(
+                        <SubMenu
+                          key={item.key}
+                          icon={item.icon}
+                          title={item.label}
+                          type={item.type}
+                        >
+                          
+                          {item.children.map((sub)=>(
+                            <Menu.Item
+                              key={sub.key}
+                            >
+                              {sub.label}
+                            </Menu.Item>
+                          )
+                          )}
+                          
+                        </SubMenu>
+                      ))
+                    )
+                  }
+                  {/* 메뉴 커스텀 코드 */}
+
                 </Menu>
               </div>
 
