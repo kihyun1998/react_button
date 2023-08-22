@@ -150,10 +150,17 @@ function App() {
                           icon={sub.icon}
                           title={sub.label}
                         >
-                          
+                          {/* 메뉴 축소 시 */}
                           {sub.children.map((g)=>(
                             <Menu.ItemGroup
-                              title={g.label}
+                              title={
+                                <div style={{
+                                  color: isDarkMode ? 'white':'black',
+                                  fontWeight:700
+                                }}>
+                                  {g.label}
+                                </div>
+                              }
                               key={g.key}
                             >
                               {g.children.map((i=>(
@@ -172,19 +179,19 @@ function App() {
                       ))
 
                     ) : (
-                      items.map((item)=>(
+                      items.map((sub)=>(
                         <SubMenu
-                          key={item.key}
-                          icon={item.icon}
-                          title={item.label}
-                          type={item.type}
+                          key={sub.key}
+                          icon={sub.icon}
+                          title={sub.label}
+                          type={sub.type}
                         >
-                          
-                          {item.children.map((sub)=>(
+                          {/* 메뉴 확장 시 */}
+                          {sub.children.map((i)=>(
                             <Menu.Item
-                              key={sub.key}
+                              key={i.key}
                             >
-                              {sub.label}
+                              {i.label}
                             </Menu.Item>
                           )
                           )}
