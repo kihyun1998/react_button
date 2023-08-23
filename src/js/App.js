@@ -1,12 +1,16 @@
 /* eslint-disable*/
 import '../css/App.css';
 import React, { useState } from "react";
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
+import Home from './Home';
+
 import ResourceUser from './pages/User';
 
 import menuData from '../data/menu.json'
 
 import koKR from 'antd/lib/locale/ko_KR';
-import { ConfigProvider, theme, Button, Card, Switch, Menu, Popover, ItemGroup } from "antd";
+import { ConfigProvider, theme, Button, FloatButton, Menu } from "antd";
 import {
   AppstoreOutlined,
   ContainerOutlined,
@@ -17,6 +21,10 @@ import {
   HistoryOutlined
 } from '@ant-design/icons';
 import SubMenu from 'antd/es/menu/SubMenu';
+
+import { MdDarkMode,MdOutlineLightMode } from "react-icons/md";
+import CustomMenu from './components/CustomMenu';
+
 
 
 function getItem(label, key, icon, children, type) {
@@ -101,10 +109,18 @@ function App() {
 
   return (
     <div className="App" style={{backgroundColor : isDarkMode ? "#000000" : "#ffffff"}}>
+      {/* 삼항연산자 사용하기 */}
+      
+      
       <div className='body'>
+        
         <ConfigProvider locale={koKR} theme={{
             algorithm : isDarkMode ? darkAlgorithm : defaultAlgorithm
             }}>
+            <FloatButton
+              icon={ isDarkMode ? <MdOutlineLightMode/> : <MdDarkMode/>}
+              onClick={handleClick}
+            />
 
             <div className="head-space">
               <div className="header" style={{backgroundColor : isDarkMode ? "#141414" : "#1C71C4"}}>
@@ -117,92 +133,35 @@ function App() {
                   </Button>
                 </div>
                 <h1>ACRA Point</h1>
-                <Card className="color-card" style={{backgroundColor : isDarkMode ? "#141414" : "#1C71C4", border:'none'}}>
-                  <h4 style={{color:"white"}}>Go {isDarkMode ? "Light":"Dark"}</h4>
-                  <Switch onClick={handleClick}/>   
-                </Card>
+                <div className="color-card"></div> 
               </div>
             </div>
             
             <div className='main'>
               {/* 메뉴부분 */}
               <div className='menu'>
-                <Menu
-                  mode="inline"
-                  inlineCollapsed={collapsed}
-                  //커스텀을 위해서 주석처리
-                  // items={items}
-                  onClick={(v)=>{
-                    console.log(v)
-                    let cp = [...keyPath]
-                    cp[0] = v.keyPath[1]
-                    cp[1] = v.keyPath[0]
-                    setKeyPath(cp)
-                  }}
-                >
-                  
-                  {/* 메뉴 커스텀 코드 */}
-                  {
-                    collapsed ? (
-                      colItems.map((sub)=>(
-                        <SubMenu
-                          key={sub.key}
-                          icon={sub.icon}
-                          title={sub.label}
-                        >
-                          {/* 메뉴 축소 시 */}
-                          {sub.children.map((g)=>(
-                            <Menu.ItemGroup
-                              title={
-                                <div style={{
-                                  color: isDarkMode ? 'white':'black',
-                                  fontWeight:700
-                                }}>
-                                  {g.label}
-                                </div>
-                              }
-                              key={g.key}
-                            >
-                              {g.children.map((i=>(
-                                <Menu.Item
-                                  label={i.label}
-                                  key={i.key}
-                                >
-                                  {i.label}
-    
-                                </Menu.Item>
-                              )))}
-                            </Menu.ItemGroup>
-                          ))}
-                          
-                        </SubMenu>
-                      ))
-
-                    ) : (
-                      items.map((sub)=>(
-                        <SubMenu
-                          key={sub.key}
-                          icon={sub.icon}
-                          title={sub.label}
-                          type={sub.type}
-                        >
-                          {/* 메뉴 확장 시 */}
-                          {sub.children.map((i)=>(
-                            <Menu.Item
-                              key={i.key}
-                            >
-                              {i.label}
-                            </Menu.Item>
-                          )
-                          )}
-                          
-                        </SubMenu>
-                      ))
-                    )
-                  }
-                  {/* 메뉴 커스텀 코드 */}
-
-                </Menu>
+                <BrowserRouter>
+                  <CustomMenu items={items} colItems={colItems} keyPath={keyPath} setKeyPath={setKeyPath} isDarkMode={isDarkMode} collapsed={collapsed}></CustomMenu>
+                  <Routes>
+                    <Route path="/" exact element={Home}></Route>
+                    <Route path="/access/accessEvent" element={Home}></Route>
+                    <Route path="/access/accessNodeSession"></Route>
+                    <Route path="/access/accessAdminSession"></Route>
+                    <Route path="/access/accessUserSession"></Route>
+                    <Route path="/resource/resourceAdmin"></Route>
+                    <Route path="/resource/resourceUser"></Route>
+                    <Route path="/resource/resourceNode"></Route>
+                    <Route path="/policy/policyToken"></Route>
+                    <Route path="/policy/policyAccessControl"></Route>
+                    <Route path="/policy/policyLifecycle"></Route>
+                    <Route path="/history/historyRequest"></Route>
+                    <Route path="/history/historyLifecycle"></Route>
+                    <Route path="/config/configProcess"></Route>
+                    <Route path="/config/configGlobalSetting"></Route>
+                    <Route path="/config/configClass"></Route>
+                    <Route path="/config/configInboxNotice"></Route>
+                  </Routes> 
+                </BrowserRouter>  
               </div>
 
               <ResourceUser keyPath={keyPath} isDarkMode={isDarkMode}/>
