@@ -1,16 +1,15 @@
 /* eslint-disable*/
 import '../css/App.css';
-import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-
-import Home from './Home';
-
-import ResourceUser from './pages/User';
-
+import CustomPage from './components/CustomPage';
+import CustomMenu from './components/CustomMenu';
 import menuData from '../data/menu.json'
+import React, { useState } from "react";
+import {BrowserRouter,Routes,Route } from 'react-router-dom';
+
+
 
 import koKR from 'antd/lib/locale/ko_KR';
-import { ConfigProvider, theme, Button, FloatButton, Menu } from "antd";
+import { ConfigProvider, theme, Button, FloatButton } from "antd";
 import {
   AppstoreOutlined,
   ContainerOutlined,
@@ -20,10 +19,8 @@ import {
   TeamOutlined,
   HistoryOutlined
 } from '@ant-design/icons';
-import SubMenu from 'antd/es/menu/SubMenu';
-
 import { MdDarkMode,MdOutlineLightMode } from "react-icons/md";
-import CustomMenu from './components/CustomMenu';
+
 
 
 
@@ -91,11 +88,14 @@ const setItemsCol = ()=>{
 
 
 function App() {
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [keyPath, setKeyPath] = useState(['','']);
+
   let items = setItems()
   let colItems = setItemsCol()
   const { defaultAlgorithm, darkAlgorithm } = theme;
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [keyPath, setKeyPath] = useState(['','']);
+
 
   const handleClick = () => {
     setIsDarkMode((previousValue) => !previousValue);
@@ -137,38 +137,37 @@ function App() {
               </div>
             </div>
             
-            <div className='main'>
-              {/* 메뉴부분 */}
-              <div className='menu'>
-                <BrowserRouter>
-                  <CustomMenu items={items} colItems={colItems} keyPath={keyPath} setKeyPath={setKeyPath} isDarkMode={isDarkMode} collapsed={collapsed}></CustomMenu>
+            <BrowserRouter>
+              <div className='main'>
+                {/* 메뉴부분 */}
+                <div className='menu'>
+                    <CustomMenu items={items} colItems={colItems} keyPath={keyPath} setKeyPath={setKeyPath} isDarkMode={isDarkMode} collapsed={collapsed}></CustomMenu>
+                </div>
+                <div className='table'>
                   <Routes>
-                    <Route path="/" exact element={Home}></Route>
-                    <Route path="/access/accessEvent" element={Home}></Route>
-                    <Route path="/access/accessNodeSession"></Route>
-                    <Route path="/access/accessAdminSession"></Route>
-                    <Route path="/access/accessUserSession"></Route>
-                    <Route path="/resource/resourceAdmin"></Route>
-                    <Route path="/resource/resourceUser"></Route>
-                    <Route path="/resource/resourceNode"></Route>
-                    <Route path="/policy/policyToken"></Route>
-                    <Route path="/policy/policyAccessControl"></Route>
-                    <Route path="/policy/policyLifecycle"></Route>
-                    <Route path="/history/historyRequest"></Route>
-                    <Route path="/history/historyLifecycle"></Route>
-                    <Route path="/config/configProcess"></Route>
-                    <Route path="/config/configGlobalSetting"></Route>
-                    <Route path="/config/configClass"></Route>
-                    <Route path="/config/configInboxNotice"></Route>
-                  </Routes> 
-                </BrowserRouter>  
+                    <Route path="/" exact></Route>
+                    <Route path="/access/accessEvent" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/access/accessNodeSession" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/access/accessAdminSession" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/access/accessUserSession" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/resource/resourceAdmin" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/resource/resourceUser" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/resource/resourceNode" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/policy/policyToken" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/policy/policyAccessControl" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/policy/policyLifecycle" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/history/historyRequest" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/history/historyLifecycle" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/config/configProcess" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/config/configGlobalSetting" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/config/configClass" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                    <Route path="/config/configInboxNotice" element={<CustomPage keyPath={keyPath} isDarkMode={isDarkMode}/>}></Route>
+                  </Routes>
+                </div>
+
+                <div className='blank'></div>
               </div>
-
-              <ResourceUser keyPath={keyPath} isDarkMode={isDarkMode}/>
-              
-
-              <div className='blank'></div>
-            </div>
+              </BrowserRouter> 
         </ConfigProvider>
       </div>
       

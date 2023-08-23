@@ -28,6 +28,7 @@ function CustomMenu(props) {
             //커스텀을 위해서 주석처리
             // items={items}
             onClick={(v)=>{
+                console.log(v)
                 let cp = [...props.keyPath]
                 cp[0] = v.keyPath[1]
                 cp[1] = v.keyPath[0]

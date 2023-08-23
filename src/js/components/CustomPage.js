@@ -6,7 +6,7 @@ import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb } from 'antd';
 
 
-function ResourceUser(props) {
+function CustomPage(props) {
     return (
     <div className='table'>
         <div className='table-header'>
@@ -37,4 +37,4 @@ function ResourceUser(props) {
   );
 }
 
-export default ResourceUser;
+export default CustomPage;
