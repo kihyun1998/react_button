@@ -14,15 +14,20 @@ function CustomMenu(props) {
     let isDarkMode = props.isDarkMode
 
     const pwd = useLocation()
-    
+
     // 0번 인덱스는 공백임
-    const pwdArr = pwd.pathname.split('/')
+    let pwdArr = [null,null,null]
+    if (pwd.pathname =='/'){
+        pwdArr = props.defaultMenus
+    }else{
+        pwdArr = pwd.pathname.split('/')
+    }
 
     return (
         <div className="App" style={{backgroundColor : isDarkMode ? "#000000" : "#ffffff"}}>
             <Menu
                 defaultSelectedKeys={[`${pwdArr[2]}`]}
-                defaultOpenKeys={[`${pwdArr[1]}`]}
+                defaultOpenKeys={['access','resource','policy','history','config']}
                 mode="inline"
                 inlineCollapsed={collapsed}
                 //커스텀을 위해서 주석처리

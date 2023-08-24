@@ -77,8 +77,12 @@ body{
   justify-content: flex-start;
   align-items: center;
   margin-top: 3em;
-  width: 70%;
-  min-width: 60em;
+  padding-left: 2em;
+  padding-right: 2em;
+  width: 100vw;
+}
+.in-table{
+  width: 100%;
 }
 .table-header{
   display: flex;
@@ -104,7 +108,7 @@ body{
   max-width: 25%;
 }
 .blank{
-  width: 0.1em;
+  width: 2em;
 }
 
 hr {

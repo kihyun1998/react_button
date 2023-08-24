@@ -12,7 +12,7 @@ function CustomPage(props) {
     // 0번 인덱스는 공백임
     const pwdArr = pwd.pathname.split('/')
     return (
-        <div className='table'>
+        <div className='in-table'>
             <div className='table-header'>
                 <h2 style={{color : props.isDarkMode ? "#ffffff" : "#000000"}}>
                     {pwdArr[2]}

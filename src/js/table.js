@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { ProTable } from '@ant-design/pro-components';
 
 import db from '../data/db.json';
-import CustomRangePicker from './CustomRangePicker';
+import CustomRangePicker from './components/CustomRangePicker';
 
 
 const timeChange = (time) =>{
