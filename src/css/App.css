@@ -55,13 +55,16 @@ body{
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+.btn-area{
+  width: 5em;
+}
+/* magin 5.5 부터 15.5*/
 .btn-menu{
-  margin-left: 1em;
   width: 3em;
 }
 .color-card{
   margin-top:1px;
-  width: 10em;
+  width: 5em;
   height: 5.5em;
 }
 .main{
@@ -83,6 +86,19 @@ body{
   width: 100%;
 }
 
+.home-link{
+  text-decoration-line: none;
+  transition: all 0.3s;
+}
+.home-link:link{
+  color: white;
+}
+.home-link:visited{
+  color: white;
+}
+.home-link:hover{
+  color:rgb(143, 143, 143);
+}
 .menu{
   width: 15em;
   max-width: 25%;
