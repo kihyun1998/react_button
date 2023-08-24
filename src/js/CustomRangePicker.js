@@ -31,9 +31,9 @@ const CustomRangePicker = () => {
     const now = dayjs();
 
     if (start){       // 왼쪽 focus
-      if (date == null){ // 0 0 인 경우
+      if (date === null){ // 0 0 인 경우
         setDate( [now, null] )
-      } else if(date[1] != null){
+      } else if(date[1] !== null){
         if(date[1]<now){
           setDate( [now, null] )
         }else{
@@ -41,11 +41,11 @@ const CustomRangePicker = () => {
         }
       } else {
         setDate( [now,date[1]])
-      }
+      } 
     }else if (end){   // 오른쪽 focus
-      if (date == null){
+      if (date === null){
         setDate( [null, now] )
-      } else if (date[0] != null) {
+      } else if (date[0] !== null) {
         if (date[0] > now){
           setDate( [null,now] )
         }else{
@@ -64,7 +64,7 @@ const CustomRangePicker = () => {
   // >> 일반적으로 ok 눌러서 적용하려면 필요함
   const onCalendarChange = (dates,b) => {
     console.log(b)
-    if (dates == null){
+    if (dates === null){
       setDate(null)
     } else{
       setDate([dates[0],dates[1]])
@@ -108,7 +108,7 @@ const CustomRangePicker = () => {
   // 모드가 start or end에서 date가 아닌 경우 
   // setNotDateMode state를 true로 변경하여 returnMode 함수 실행하도록
   const onPanelChange = (_, newMode) => {
-    if (newMode == null){
+    if (newMode === null){
       return;
     }else{
       setMode(newMode)
@@ -137,14 +137,14 @@ const CustomRangePicker = () => {
   const onDateClick = (clickDate) => {
 
     if (start){       // 왼쪽 focus
-      if (date == null){ // 0 0 인 경우
+      if (date === null){ // 0 0 인 경우
         setDate( [clickDate, null] )
       } else {
         setDate( [clickDate,date[1]])
       }
     }else if (end){   // 오른쪽 focus
       console.log(1)
-      if (date == null){
+      if (date === null){
         setDate( [null, clickDate] )
       } else {
         setDate( [date[0], clickDate])

@@ -40,11 +40,11 @@ const setItems = ()=>{
   let itemsArr=[]
   let cnt = 0
   for (let [k, v] of Object.entries(menuData.Children)) {
-    if (v.Show == true){
+    if (v.Show === true){
       let subArr = []
 
       for (let [ck,cv] of Object.entries(v.Children)){
-        if(cv.Show == true){
+        if(cv.Show === true){
           let sub_itm = getItem(ck,ck)
           subArr.push(sub_itm)
         }
@@ -62,11 +62,11 @@ const setItemsCol = ()=>{
   let itemsArr=[]
   let cnt = 0
   for (let [k, v] of Object.entries(menuData.Children)) {
-    if (v.Show == true){
+    if (v.Show === true){
       let subArr = []
       let subArr2 = []
       for (let [ck,cv] of Object.entries(v.Children)){
-        if(cv.Show == true){
+        if(cv.Show === true){
           let sub_itm = getItem(ck,ck)
           subArr2.push(sub_itm)
         }
