@@ -15,9 +15,9 @@ const timeChange = (time) =>{
 const dataSource = db.map((v,i) => {
         let data = {};
         data['key'] = i;
-        data['name'] = v.Name;
-        data['userId'] = v.ID;
-        data['userClassName'] = v.UserClass_Name;
+        data['name'] = v?.Name;
+        data['userId'] = v?.ID;
+        data['userClassName'] = v?.UserClass_Name;
         data['status'] = v.Status;
         data['IPAddress'] = typeof v.EasyAccessAddresses === "undefined" ? '-' : v.EasyAccessAddresses[0].IPAddress;
         data['ou'] = v.OU;
