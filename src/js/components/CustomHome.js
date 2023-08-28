@@ -2,7 +2,7 @@
 import '../../css/App.css';
 import React from "react";
 import {useLocation } from 'react-router-dom';
-import CustomProTable from '../table';
+import CustomProTable from './CustomTable';
 import { HomeOutlined } from '@ant-design/icons';
 import { Breadcrumb } from 'antd';
 
