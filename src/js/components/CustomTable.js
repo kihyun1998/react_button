@@ -4,6 +4,7 @@ import isBetween from "dayjs/plugin/isBetween";
 
 import db from '../../data/db.json';
 import CustomRangePicker from './CustomRangePicker';
+import CustomRangePickerForSearch from "./CustomRangePickerForSearch";
 
 import { ProTable } from '@ant-design/pro-components';
 import { DatePicker } from 'antd';
@@ -47,18 +48,22 @@ const dataSource = db.map((v,i) => {
 const CustomProTable = () => {
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
-
     const searchInput = useRef(null);
 
+    // 검색
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         setSearchText(selectedKeys[0]);
         setSearchedColumn(dataIndex);
     };
+
+    // 초기화
     const handleReset = (clearFilters) => {
         clearFilters();
         setSearchText("");
     };
+
+    //input창 검색
     const inputColumnSearch = (dataIndex) => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
             <div
@@ -136,7 +141,7 @@ const CustomProTable = () => {
             ),
     });
 
-
+    //Range picker 검색
     const timeColumnSearch = (dataIndex) => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
             <div
@@ -145,15 +150,13 @@ const CustomProTable = () => {
                 }}
                 onKeyDown={(e) => e.stopPropagation()}
             >
-                <RangePicker 
-                    style={{ marginBottom: 8, display: 'block' }} 
-                    value={selectedKeys[0]} 
-                    onChange={e => setSelectedKeys(e ? [e] : [])} 
-                    onPressEnter={() => { 
-                        confirm()
-                        setSearchText(selectedKeys[0]) 
-                        setSearchedColumn(dataIndex)
-                    }} 
+                <CustomRangePickerForSearch 
+                    selectedKeys={selectedKeys}
+                    setSelectedKeys={setSelectedKeys}
+                    setSearchText={setSearchText}
+                    setSearchedColumn={setSearchedColumn}
+                    dataIndex={dataIndex}
+                    confirm={confirm}
                 />
                 <Space>
                     <Button
