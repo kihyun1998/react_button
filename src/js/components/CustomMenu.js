@@ -38,6 +38,7 @@ function CustomMenu(props) {
                     cp[1] = v.keyPath[0]
                     props.setKeyPath(cp)
                 }}
+                selectedKeys={[`${pwdArr[2]}`]}
                 >
                 
                 {/* 메뉴 커스텀 코드 */}
