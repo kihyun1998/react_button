@@ -63,7 +63,6 @@ const CustomRangePicker = () => {
   // 다른데서 setDate하는데 왜 필요한가?
   // >> 일반적으로 ok 눌러서 적용하려면 필요함
   const onCalendarChange = (dates,b) => {
-    console.log(b)
     if (dates === null){
       setDate(null)
     } else{
@@ -112,7 +111,6 @@ const CustomRangePicker = () => {
       return;
     }else{
       setMode(newMode)
-      console.log(newMode)
       const chkIsDate = (el) => el !== 'date';
       if (newMode.some(chkIsDate)){
         setNotDateMode(true)
@@ -143,7 +141,6 @@ const CustomRangePicker = () => {
         setDate( [clickDate,date[1]])
       }
     }else if (end){   // 오른쪽 focus
-      console.log(1)
       if (date === null){
         setDate( [null, clickDate] )
       } else {
@@ -168,7 +165,6 @@ const CustomRangePicker = () => {
       // 시간 보여주면서 금지된 값은 안보이게
       showTime={{
         hideDisabledOptions:true,
-        
       }}
 
       // 값은 date state로 직접 지정
@@ -193,7 +189,6 @@ const CustomRangePicker = () => {
           style={{width:"100%",height:"100%"}}
           onClick={()=>{
             onDateClick(current)
-            console.log(date)
           }}>
             {current.date()}
           </div>
