@@ -59,7 +59,7 @@ const CustomRangePickerForSearch = (props) => {
     }
     return (
         <RangePicker
-            style={{ marginBottom: 8, display: 'block' }} 
+            style={{ marginBottom: 8, display: 'block',width:"21em",height:"100%" }} 
             allowClear={true}
             size='small'
             // renderExtraFooter={footer}
